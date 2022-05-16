@@ -3,11 +3,12 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import swal from '@sweetalert/with-react'
 
-export default class CreateEmployee extends Component {
+
+export default class CreateVendor extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeEmployeeID = this.onChangeEmployeeID.bind(this);
+        this.onChangeVendorID = this.onChangeVendorID.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangePostalCode = this.onChangePostalCode.bind(this);
@@ -16,22 +17,23 @@ export default class CreateEmployee extends Component {
         this.onChangeMaterials = this.onChangeMaterials.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+
         this.state = {
-            EmployeeID: '',
+            VendorID: '',
             CompanyName: '',
             Address: '',
             PostalCode: '',
             Email: '',
             Description: '',
             Materials: '',
-            Employee: []
+            Vendor: []
         }
     }
 
-    //set the EmployeeID 
-    onChangeEmployeeID(e) {
+    //set the VendorID 
+    onChangeVendorID(e) {
         this.setState({
-            EmployeeID: e.target.value
+            VendorID: e.target.value
         })
     }
 
@@ -85,8 +87,8 @@ export default class CreateEmployee extends Component {
     onSubmit(e) {
         e.preventDefault();
        
-        const Employee = {
-            EmployeeID: this.state.EmployeeID,
+        const Vendor = {
+            VendorID: this.state.VendorID,
             CompanyName: this.state.CompanyName,
             Address: this.state.Address,
             PostalCode: this.state.PostalCode,
@@ -96,17 +98,17 @@ export default class CreateEmployee extends Component {
 
         }
 
-        console.log(Employee);
+        console.log(Vendor);
 
         //validation
         
 
-            axios.post('http://localhost:5000/Employee/add', Employee)
+            axios.post('http://localhost:5000/Vendor/add', Vendor)
                 .then(res => console.log(res.data));
 
             swal({
                     title: "Done!",
-                    text: "Employee Successfully Added",
+                    text: "Vendor Successfully Added",
                     icon: "success",
                     button: "Okay!"
                 })
@@ -121,7 +123,7 @@ export default class CreateEmployee extends Component {
             <div class = "row" >
             <div class = "col-6" >
             <br/ > < br/ > < br/ > < br/ > < br/ > < br/ >
-            <img src = "https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
+           <img src = "https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
             width = "90%"
             height = "60% " />
             </div> <div class = "col-6" >
@@ -130,15 +132,15 @@ export default class CreateEmployee extends Component {
             <div className = "col-md-8 mt-4 mx-auto" > </div> 
             <h3 className = "text-center" > 
             <font face = "Comic sans MS" size = "6" > 
-            New Employee</font> </h3 >  
+            New Vendor</font> </h3 >  
             <form onSubmit = { this.onSubmit } >
             <div className = "form-group" >
-            <label > Employee ID: </label>
+            <label > Vendor ID: </label>
             <input type = "Number"
             required className = "form-control"
-            placeholder = "Enter Employee ID"
-            value = { this.state.EmployeeID }
-            onChange = { this.onChangeEmployeeID }/>
+            placeholder = "Enter Vendor ID"
+            value = { this.state.VendorID }
+            onChange = { this.onChangeVendorID }/>
              </div >
              
               <div className = "form-group" >
@@ -183,6 +185,7 @@ export default class CreateEmployee extends Component {
             onChange = { this.onChangeDescription }/>  </div>
 
 
+
             <div className = "form-group" >
             <label > SupplyMaterials And goods: </label> <
             input type = "text"
@@ -190,6 +193,7 @@ export default class CreateEmployee extends Component {
             placeholder = "Enter SupplyMaterials And goods"
             value = { this.state.Materials }
             onChange = { this.onChangeMaterials }/>  </div>
+
 
             
             
@@ -204,4 +208,3 @@ export default class CreateEmployee extends Component {
         );
     }
 }
-
