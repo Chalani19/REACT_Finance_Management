@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 //Databass Schema
 
-const VendorSchema = new Schema({
-    VendorID: { type: Number, required: true },
+const PaymentSchema = new Schema({
+    PaymentID: { type: Number, required: true },
     CompanyName: { type: String, required: true },
     Address: { type: String, required: true },
     PostalCode: { type: String, required: true },
@@ -18,7 +18,7 @@ const VendorSchema = new Schema({
 });
 
 
+const Payment  = mongoose.model('Payment ', PaymentSchema);
 
-const Vendor  = mongoose.model('Vendor ', VendorSchema);
+module.exports = Payment ;
 
-module.exports = Vendor ;

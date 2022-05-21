@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
+import swal from '@sweetalert/with-react'
 
-export default class EditVendor extends Component {
+export default class CreatePayment extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeVendorID = this.onChangeVendorID.bind(this);
+        this.onChangePaymentID = this.onChangePaymentID.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangePostalCode = this.onChangePostalCode.bind(this);
@@ -15,54 +16,22 @@ export default class EditVendor extends Component {
         this.onChangeMaterials = this.onChangeMaterials.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
-
         this.state = {
-            VendorID: '',
+            PaymentID: '',
             CompanyName: '',
             Address: '',
             PostalCode: '',
             Email: '',
             Description: '',
             Materials: '',
-            Vendor: []
+            Payment: []
         }
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/Vendor/' + this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    VendorID: response.data.VendorID,
-                    Address: response.data.Address,
-                    CompanyName: response.data.CompanyName,
-                    PostalCode: response.data.PostalCode,
-                    Email: response.data.Email,
-                    Description: response.data.Description,
-                    Materials: response.data.Materials,
-                })
-            })
-            .catch(function(error) {
-                console.log(error);
-            })
-
-        axios.get('http://localhost:5000/Vendor/')
-            .then(response => {
-                if (response.data.length > 0) {
-                    this.setState({
-                        Vendor: response.data.map(Vendor => Vendor.CompanyName),
-                    })
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
-    }
-
-    //set the VendorID 
-    onChangeVendorID(e) {
+    //set the PaymentID 
+    onChangePaymentID(e) {
         this.setState({
-            VendorID: e.target.value
+            PaymentID: e.target.value
         })
     }
 
@@ -110,11 +79,14 @@ export default class EditVendor extends Component {
         })
     }
 
+   
+
+    //submit Function
     onSubmit(e) {
         e.preventDefault();
-
-        const Vendor = {
-            VendorID: this.state.VendorID,
+       
+        const Payment = {
+            PaymentID: this.state.PaymentID,
             CompanyName: this.state.CompanyName,
             Address: this.state.Address,
             PostalCode: this.state.PostalCode,
@@ -124,12 +96,24 @@ export default class EditVendor extends Component {
 
         }
 
-        console.log(Vendor);
+        console.log(Payment);
 
-        axios.post('http://localhost:5000/Vendor/update/' + this.props.match.params.id, Vendor)
-            .then(res => console.log(res.data));
-        alert("Edit Successfully")
-        window.location = '/';
+        //validation
+        
+
+            axios.post('http://localhost:5000/Payment/add', Payment)
+                .then(res => console.log(res.data));
+
+            swal({
+                    title: "Done!",
+                    text: "Payment Successfully Added",
+                    icon: "success",
+                    button: "Okay!"
+                })
+                .then((value) => {
+                   window.location = '/list';
+                });
+        
     }
 
     render() {
@@ -146,22 +130,22 @@ export default class EditVendor extends Component {
             <div className = "col-md-8 mt-4 mx-auto" > </div> 
             <h3 className = "text-center" > 
             <font face = "Comic sans MS" size = "6" > 
-            Edit Vendor</font> </h3 >  
+            New Payment</font> </h3 >  
             <form onSubmit = { this.onSubmit } >
             <div className = "form-group" >
-            <label > Vendor ID: </label>
+            <label > Payment ID: </label>
             <input type = "Number"
             required className = "form-control"
-            placeholder = "Enter Vendor ID"
-            value = { this.state.VendorID }
-            onChange = { this.onChangeVendorID }/>
+            placeholder = "Enter Payment ID"
+            value = { this.state.PaymentID }
+            onChange = { this.onChangePaymentID }/>
              </div >
              
               <div className = "form-group" >
             <label > Company Name: </label> 
             <input type = "text"
             required className = "form-control"
-            placeholder = "EnterCompany Name"
+            placeholder = "Enter Company Name"
             value = { this.state.CompanyName }
             onChange = { this.onChangeCompanyName }/> </div > 
              <div className = "form-group" >
@@ -175,9 +159,9 @@ export default class EditVendor extends Component {
             </div > 
              <div className = "form-group" >
             <label > Posta Code: </label>
-             <input type = "text"
+             <input type = "Number"
             className = "form-control"
-            placeholder = "Enter PostalCode"
+            placeholder = "Enter Postal Code"
             value = { this.state.PostalCode }
             onChange = { this.onChangePostalCode }/> </div > 
              <div className = "form-group" >
@@ -194,20 +178,18 @@ export default class EditVendor extends Component {
             <label > Brief Description of company: </label> <
             input type = "text"
             required className = "form-control"
-            placeholder = "Enter a Brief Description of company"
+            placeholder = "Enter Brief Description of company"
             value = { this.state.Description }
             onChange = { this.onChangeDescription }/>  </div>
-
 
 
             <div className = "form-group" >
             <label > SupplyMaterials And goods: </label> <
             input type = "text"
             required className = "form-control"
-            placeholder = "Enter an SupplyMaterials And goods"
+            placeholder = "Enter SupplyMaterials And goods"
             value = { this.state.Materials }
             onChange = { this.onChangeMaterials }/>  </div>
-
 
             
             
@@ -215,10 +197,11 @@ export default class EditVendor extends Component {
             
             </div > <div className = "form-group" >
             <input type = "submit"
-            value = "Edit"
+            value = "Create"
             className = "btn btn-primary" />
             </div> </form > </div> </div >  </div> </div >  <br/ > < br/ > 
              </div>
         );
     }
 }
+

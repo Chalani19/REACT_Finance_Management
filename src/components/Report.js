@@ -3,39 +3,36 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 //import { Button } from 'react-bootstrap';
 
-
-const Vendor = props => ( <
+const Payment = props => (<
     tr >
     <
-    td > { props.Vendor.VendorID } </td> <
-    td > { props.Vendor.CompanyName } </td> <
-    td > { props.Vendor.Address } </td> <
-    td > { props.Vendor.PostalCode } </td> <
-    td > { props.Vendor.Email } </td> <
-    td > { props.Vendor.Description } </td> <
-    td > { props.Vendor.Materials } </td> <
-    td >
-    <
-    Link to = { "/edit/" + props.Vendor._id } > Edit </Link> | <a href=" " onClick={() => { props.deleteVendor(props.Vendor._id) }}>Delete</a > </
-    td > </tr> 
+        td > {props.Payment.PaymentID} </td> <
+            td > {props.Payment.CompanyName} </td> <
+                td > {props.Payment.Address} </td> <
+                    td > {props.Payment.PostalCode} </td> <
+                        td > {props.Payment.Email} </td> <
+                            td > {props.Payment.Description} </td> <
+                                td > {props.Payment.Materials} </td> <
+                                    td >
+        <
+            Link to={"/edit/" + props.Payment._id} > Edit </Link> | <a href=" " onClick={() => { props.deletePayment(props.Payment._id) }}>Delete</a > </
+    td > </tr>
 )
 
-export default class VendorList extends Component {
+export default class PaymentList extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
-            Vendor: []
+            Payment: []
         };
     }
 
 
-
     componentDidMount() {
-        axios.get('http://localhost:5000/Vendor/')
+        axios.get('http://localhost:5000/Payment/')
             .then(response => {
-                this.setState({ Vendor: response.data })
+                this.setState({ Payment: response.data })
             })
             .catch((error) => {
                 console.log(error);
@@ -43,44 +40,42 @@ export default class VendorList extends Component {
     }
 
     getPosts() {
-        axios.get('http://localhost:5000/Vendor/')
+        axios.get('http://localhost:5000/Payment/')
             .then(response => {
-                this.setState({ Vendor: response.data })
+                this.setState({ Payment: response.data })
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    deleteVendor(id) {
+    deletePayment(id) {
         if (window.confirm('Are you sure?')) {
-            axios.delete('http://localhost:5000/Vendor/' + id)
+            axios.delete('http://localhost:5000/Payment/' + id)
                 .then(response => { console.log(response.data) });
 
             this.setState({
-                Vendor: this.state.Vendor.filter(el => el._id !== id)
+                Payment: this.state.Payment.filter(el => el._id !== id)
             })
         }
     }
 
-    VendorList() {
-        return this.state.Vendor.map(currentVendor => {
-            return <Vendor Vendor = { currentVendor }
-            deleteVendor = { this.deleteVendor }
-            key = { currentVendor._id }
+    PaymentList() {
+        return this.state.Payment.map(currentPayment => {
+            return <Payment Payment={currentPayment}
+                deletePayment={this.deletePayment}
+                key={currentPayment._id}
             />;
         })
     }
 
-
-    filterData(Vendor, searchKey) {
+    filterData(Payment, searchKey) {
 
         this.setState({
-            Vendor: this.state.Vendor.filter(el => el.CompanyName = searchKey)
+            Payment: this.state.Payment.filter(el => el.CompanyName = searchKey)
         })
 
     }
-
 
 
 
@@ -89,90 +84,97 @@ export default class VendorList extends Component {
 
         const searchKey = e.currentTarget.value;
 
-        axios.get('http://localhost:5000/Vendor/').then(response => {
-
+        axios.get('http://localhost:5000/Payment/').then(response => {
 
             const resultt = response.data
             const result = resultt.filter((props) =>
                 props.CompanyName.includes(searchKey)
             )
 
-            this.setState({ Vendor: result })
+            this.setState({ Payment: result })
 
         });
 
     }
-    Report (){ window.print();}
+    Report() { window.print(); }
 
     render() {
-        return ( <
-            div className = "container" >
-    
-            <div style = {
-                { float: 'none'}
-            } > 
-           
-            </div>  <br/>
-            
+        return (<
+            div className="container" >
+
+            <div style={
+                { float: 'none' }
+            } >
+
+            </div>  <br />
+
             <
-            div className = "row" >
-            <
-            div className = "col-lg-9 mt-2 mb-2" >
-            <
-            h4 > Vendor Report </h4> </
-            div > </
+                div className="row" >
+                <
+                    div className="col-lg-9 mt-2 mb-2" >
+                    <
+                        h4 > Payment Report </h4> </
+                div > </
             div>
 
-
             <
-            table class="table table-bordered table-white" >
-            <
-            thead className = "thead-light" >
-            <
-            tr >
-            <
-            th > Vendor ID </th> <
-            th > Company Name </th> <
-            th > Company Street Address </th> <
-            th > Postal Code </th> <
-            th > E mail </th> <
-            th > Brief Description of company </th> <
-            th > Supply Materials And goods </th> </
-            tr > </
-            thead> <
-            tbody >
-            
-             {
-                this.state.Vendor.map(props =>
+                table class="table table-bordered table-white" >
+                <
+                    thead className="thead-light" >
                     <
-                    tr key = { props.VendorID } >
-                    
-                    <td > { props.VendorID } </td>  <
-                    td > { props.CompanyName } </td>  <
-                    td > { props.Address } </td>  <
-                    td > { props.PostalCode } </td>  < 
-                    td > { props.Email } </td>  <  
-                    td > { props.Description } </td>  < 
-                    td > { props.Materials } </td>  
-                    
+                        tr >
+                        <
+                            th > Payment ID </th> <
+                                th > Company Name </th> <
+                                    th > Company Street Address </th> <
+                                        th > Postal Code </th> <
+                                            th > E mail </th> <
+                                                th > Brief Description of company </th> <
+                                                    th > Supply Materials And goods </th> </
+                    tr > </
+                thead> <
+                    tbody >
 
-                    </tr>
-                )
+                    {
+                        this.state.Payment.map(props =>
+                            <
+                                tr key={props.PaymentID} >
 
-            }
+                                <td > {props.PaymentID} </td>  <
+                                    td > {props.CompanyName} </td>  <
+                                        td > {props.Address} </td>  <
+                                            td > {props.PostalCode} </td>  <
+                                                td > {props.Email} </td>  <
+                                                    td > {props.Description} </td>  <
+                                                        td > {props.Materials} </td>
 
-            </tbody> </table >
+                            </tr>
+                        )
 
-            <div className = "container" >
-           
-            
-            <input type = "Button"
-            onClick = { this.Report }
-            value = "Print This Report"
-            className = "btn btn-danger"/>
+                    }
+
+                </tbody> </table >
+
+            <div className="container" >
+
+                <input type="Button"
+                    onClick={this.Report}
+                    value="Print This Report"
+                    className="btn btn-danger" />
+
+                    <br></br>
+                    <br></br>
+
+                <div>
+                    <Link to="/list" >
+                        <button type="button" class="btn btn-success" variant="primary" > Payment's Details </button>
+                    </Link >
+                </div>
+
             </div>
 
-            </div>
+        </div>
         )
     }
 }
+

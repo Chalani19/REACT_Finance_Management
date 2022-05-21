@@ -3,11 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar.component"
-import EditVendor from "./components/edit-Vendor.component";
-import CreateVendor from "./components/create-Vendor.component";
-import VendorList from "./components/Vendor-list.component";
+import home from './components/home';
+import EditPayment from "./components/edit-Payment.component";
+import CreatePayment from "./components/create-Payment.component";
+import PaymentList from "./components/Payment-list.component";
 import Report from "./components/Report";
-
 
 
 function App() {
@@ -18,9 +18,10 @@ function App() {
         div className = "container" >
         <Navbar / >
         <br / >
-        <Route path = "/" exact component = { VendorList }/>
-        <Route path = "/edit/:id" component = { EditVendor }/> 
-        <Route path = "/create" component = { CreateVendor }/>
+        <Route path="/" exact component = {home}/>
+        <Route path = "/list" exact component = { PaymentList }/>
+        <Route path = "/edit/:id" component = { EditPayment }/> 
+        <Route path = "/create" component = { CreatePayment }/>
         <Route path = "/Report" component = { Report }/> 
         
         </
@@ -29,3 +30,4 @@ function App() {
 }
 
 export default App;
+

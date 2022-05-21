@@ -4,37 +4,25 @@ import { Link } from 'react-router-dom';
 export default class Navbar extends Component {
 
     render() {
-        return ( <
-            nav className = "navbar navbar-dark bg-dark navbar-expand-lg" >
-            <
-            Link to = "/"
-            className = "navbar-brand" ><font face = "Comic sans MS" size ="4"> Vendor </font></Link> <
-            div className = "collpase navbar-collapse" >
-            <form class="form-inline my-2 my-lg-0">
-            <
-            ul className = "navbar-nav mr-auto" >
-            
-            
-            
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        return ( 
+            <nav className="navbar navbar-expand-lg navbar-light bg-lig">
 
-            
-            
-
-            
-            <
-            Link to = "/Report" >
-            <button class="btn btn-outline-success my-4 my-sm-0" type="submit">Report</button></Link>
-            </ul >
-            </form>
-            </div > </nav>
+            <div className="container-fluid">
+                <a className="navbar-brand" href="#" style={{ color: "#800040" }}>RUSTY  DECO</a>
+                <button className="navbar-toggler" type="button" data-toggle="collaps" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item active">
+                            <Link to="/" style={{ color: "blue" }} className="nav-link">Home</Link>
+                        </li>
+                    </ul>
+                </div>
+                <h3 style={{ color: "#000099" }}>FINANCE MANAGEMENT</h3>
+            </div>
+        </nav>
         );
     }
 }

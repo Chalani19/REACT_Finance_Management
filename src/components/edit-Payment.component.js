@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import swal from '@sweetalert/with-react'
 
-
-export default class CreateVendor extends Component {
+export default class EditPayment extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeVendorID = this.onChangeVendorID.bind(this);
+        this.onChangePaymentID = this.onChangePaymentID.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangePostalCode = this.onChangePostalCode.bind(this);
@@ -17,23 +15,53 @@ export default class CreateVendor extends Component {
         this.onChangeMaterials = this.onChangeMaterials.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
-
         this.state = {
-            VendorID: '',
+            PaymentID: '',
             CompanyName: '',
             Address: '',
             PostalCode: '',
             Email: '',
             Description: '',
             Materials: '',
-            Vendor: []
+            Payment: []
         }
     }
 
-    //set the VendorID 
-    onChangeVendorID(e) {
+    componentDidMount() {
+        axios.get('http://localhost:5000/Payment/' + this.props.match.params.id)
+            .then(response => {
+                this.setState({
+                    PaymentID: response.data.PaymentID,
+                    Address: response.data.Address,
+                    CompanyName: response.data.CompanyName,
+                    PostalCode: response.data.PostalCode,
+                    Email: response.data.Email,
+                    Description: response.data.Description,
+                    Materials: response.data.Materials,
+                })
+            })
+            .catch(function(error) {
+                console.log(error);
+            })
+
+        axios.get('http://localhost:5000/Payment/')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({
+                        Payment: response.data.map(Payment => Payment.CompanyName),
+                    })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
+
+    //set the PaymentID 
+    onChangePaymentID(e) {
         this.setState({
-            VendorID: e.target.value
+            PaymentID: e.target.value
         })
     }
 
@@ -81,14 +109,11 @@ export default class CreateVendor extends Component {
         })
     }
 
-   
-
-    //submit Function
     onSubmit(e) {
         e.preventDefault();
-       
-        const Vendor = {
-            VendorID: this.state.VendorID,
+
+        const Payment = {
+            PaymentID: this.state.PaymentID,
             CompanyName: this.state.CompanyName,
             Address: this.state.Address,
             PostalCode: this.state.PostalCode,
@@ -98,24 +123,12 @@ export default class CreateVendor extends Component {
 
         }
 
-        console.log(Vendor);
+        console.log(Payment);
 
-        //validation
-        
-
-            axios.post('http://localhost:5000/Vendor/add', Vendor)
-                .then(res => console.log(res.data));
-
-            swal({
-                    title: "Done!",
-                    text: "Vendor Successfully Added",
-                    icon: "success",
-                    button: "Okay!"
-                })
-                .then((value) => {
-                   window.location = '/';
-                });
-        
+        axios.post('http://localhost:5000/Payment/update/' + this.props.match.params.id, Payment)
+            .then(res => console.log(res.data));
+        alert("Edit Successfully")
+        window.location = '/list';
     }
 
     render() {
@@ -123,7 +136,7 @@ export default class CreateVendor extends Component {
             <div class = "row" >
             <div class = "col-6" >
             <br/ > < br/ > < br/ > < br/ > < br/ > < br/ >
-           <img src = "https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
+            <img src = "https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
             width = "90%"
             height = "60% " />
             </div> <div class = "col-6" >
@@ -132,22 +145,22 @@ export default class CreateVendor extends Component {
             <div className = "col-md-8 mt-4 mx-auto" > </div> 
             <h3 className = "text-center" > 
             <font face = "Comic sans MS" size = "6" > 
-            New Vendor</font> </h3 >  
+            Edit Payment</font> </h3 >  
             <form onSubmit = { this.onSubmit } >
             <div className = "form-group" >
-            <label > Vendor ID: </label>
+            <label > Payment ID: </label>
             <input type = "Number"
             required className = "form-control"
-            placeholder = "Enter Vendor ID"
-            value = { this.state.VendorID }
-            onChange = { this.onChangeVendorID }/>
+            placeholder = "Enter Payment ID"
+            value = { this.state.PaymentID }
+            onChange = { this.onChangePaymentID }/>
              </div >
              
               <div className = "form-group" >
             <label > Company Name: </label> 
             <input type = "text"
             required className = "form-control"
-            placeholder = "Enter Company Name"
+            placeholder = "EnterCompany Name"
             value = { this.state.CompanyName }
             onChange = { this.onChangeCompanyName }/> </div > 
              <div className = "form-group" >
@@ -161,9 +174,9 @@ export default class CreateVendor extends Component {
             </div > 
              <div className = "form-group" >
             <label > Posta Code: </label>
-             <input type = "Number"
+             <input type = "text"
             className = "form-control"
-            placeholder = "Enter Postal Code"
+            placeholder = "Enter PostalCode"
             value = { this.state.PostalCode }
             onChange = { this.onChangePostalCode }/> </div > 
              <div className = "form-group" >
@@ -180,20 +193,18 @@ export default class CreateVendor extends Component {
             <label > Brief Description of company: </label> <
             input type = "text"
             required className = "form-control"
-            placeholder = "Enter Brief Description of company"
+            placeholder = "Enter a Brief Description of company"
             value = { this.state.Description }
             onChange = { this.onChangeDescription }/>  </div>
-
 
 
             <div className = "form-group" >
             <label > SupplyMaterials And goods: </label> <
             input type = "text"
             required className = "form-control"
-            placeholder = "Enter SupplyMaterials And goods"
+            placeholder = "Enter an SupplyMaterials And goods"
             value = { this.state.Materials }
             onChange = { this.onChangeMaterials }/>  </div>
-
 
             
             
@@ -201,10 +212,11 @@ export default class CreateVendor extends Component {
             
             </div > <div className = "form-group" >
             <input type = "submit"
-            value = "Create"
+            value = "Edit"
             className = "btn btn-primary" />
             </div> </form > </div> </div >  </div> </div >  <br/ > < br/ > 
              </div>
         );
     }
 }
+
