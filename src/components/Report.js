@@ -103,11 +103,11 @@ export default class PaymentList extends Component {
 
                 </div>  <br />
 
-                <div className="row" >
-                    <div className="col-lg-9 mt-2 mb-2" >
-                        <h4> Payment Report </h4>
-                    </div>
+                <div className="text-center">
+                    <h4 > Payment Report </h4>
                 </div>
+
+               <br />
 
                 <table class="table table-bordered table-white" >
                     <thead className="thead-light" >
@@ -144,14 +144,15 @@ export default class PaymentList extends Component {
 
                 <div className="container" >
 
-                    <input type="Button" onClick={this.Report} value="Print This Report" className="btn btn-danger" />
+                    <div className="text-center">
+                        <input type="Button" onClick={this.Report} value="Print This Report" className="btn btn-danger" />
+                    </div>
 
                     <br></br>
-                    <br></br>
 
-                    <div>
+                    <div className="text-center">
                         <Link to="/list" >
-                            <button type="button" class="btn btn-success" variant="primary" > Payment's Details </button>
+                            <button type="button" class="btn btn-success" variant="primary" > Payment Details </button>
                         </Link >
                     </div>
 

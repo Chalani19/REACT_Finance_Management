@@ -6,20 +6,20 @@ export default class home extends Component {
     render() {
         return (
             <div>
-                <h1 style={{ color: "#990033" }}>Home Page</h1>
+                <h1 className="text-center" style={{ color: "#990033" }}>Home Page</h1>
 
                 <br></br>
                 <br></br>
                 <br></br>
 
                 <div className="container" >
-                    <div>
+                    <div className="text-center">
                         <Link to="/list" >
                             <button type="button" class="btn btn-success" variant="primary" > Payment Details </button>
                         </Link >
                     </div>
                     <br></br>
-                    <div >
+                    <div className="text-center">
                         <Link to="" >
                             <button type="button" class="btn btn-success" variant="primary" > Salary Details </button>
                         </Link >

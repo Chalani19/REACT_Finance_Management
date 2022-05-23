@@ -132,88 +132,81 @@ export default class CreatePayment extends Component {
     }
 
     render() {
-        return (<div >
-            <div class="row" >
-                <div class="col-6" >
-                    <br /> < br /> < br /> < br /> < br /> < br />
-                    <img src="https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
-                        width="90%"
-                        height="60% " />
-                </div>
-                <div class="col-6" >
-                    <div class="myformstyle2" >
-                        <div className="card-body" >
-                            <div className="col-md-8 mt-4 mx-auto" > </div>
-                            <h3 className="text-center" style={{ color: "#990033" }}><font face="Comic sans MS" size="6" > New Payment</font> </h3 >
-                            <form onSubmit={this.onSubmit} >
+        return (
+            
+                <div className='container'>
+                    <h3 className="text-center" style={{ color: "#990033" }}> New Payment</h3 >
 
-                                <div className="form-group" >
+                    <div className="col-md-8 mt-4 mx-auto">
+                        <img src="https://c.tenor.com/L5g2mZgoLykAAAAS/office-of-course.gif"
+                            width="100%" />
+                    </div>
+
+                    <div className="container mx-auto">
+                        <form onSubmit={this.onSubmit} className="mt-5">
+                            <div className="row">
+
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
                                     <label > Payment ID: </label>
                                     <input type="text" required className="form-control" placeholder="Enter Payment ID" value={this.state.PaymentID}
                                         onChange={this.onChangePaymentID} />
                                 </div >
 
-                                <div className="form-group" >
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
                                     <label > Customer ID: </label>
                                     <input type="text" required className="form-control" placeholder="Enter Customer ID" value={this.state.CustomerID}
                                         onChange={this.onChangeCustomerID} />
                                 </div >
 
-                                <div className="form-group" >
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
                                     <label > First Name: </label>
                                     <input type="text" required className="form-control" placeholder="Enter First Name" value={this.state.FirstName}
                                         onChange={this.onChangeFirstName} />
                                 </div >
 
-                                <div className="form-group" >
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
                                     <label > Last Name: </label>
                                     <input type="text" required className="form-control" placeholder="Enter Last Name" value={this.state.LastName}
                                         onChange={this.onChangeLastName} />
                                 </div >
 
-                                <div className="form-group" >
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                    <label > Email: </label>
+                                    <input type="email" required className="form-control" placeholder="Enter an Email" value={this.state.Email}
+                                        onChange={this.onChangeEmail} />  </div>
 
-                                    <div className="form-group" >
-                                        <label > Email: </label>
-                                        <input type="email" required className="form-control" placeholder="Enter an Email" value={this.state.Email}
-                                            onChange={this.onChangeEmail} />  </div>
-
-                                    <div className="form-group" >
-                                        <label >Payment Method: </label>
-                                        <input type="text" required className="form-control" placeholder="Enter Payment Method" value={this.state.PaymentMethod}
-                                            onChange={this.onChangePaymentMethod} />
-                                    </div>
-
-                                    <div className="form-group" >
-                                        <label > Package Name: </label>
-                                        <input type="text" required className="form-control" placeholder="Enter Package Name" value={this.state.PackageName}
-                                            onChange={this.onChangePackageName} />
-                                    </div>
-
-                                    <div className="form-group" >
-                                        <label > Total Amount: </label>
-                                        <input type="text" required className="form-control" placeholder="Enter Total Amount" value={this.state.TotalAmount}
-                                            onChange={this.onChangeTotalAmount} />
-                                    </div>
-
-                                    <div className="form-group" >
-                                        <label > Payment Status: </label>
-                                        <input type="text" required className="form-control" placeholder="Enter Payment Status" value={this.state.PaymentStatus}
-                                            onChange={this.onChangePaymentStatus} />
-                                    </div >
-
-                                </div > <div className="form-group" >
-                                    <input type="submit"
-                                        value="Create"
-                                        className="btn btn-primary" />
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                    <label >Payment Method: </label>
+                                    <input type="text" required className="form-control" placeholder="Enter Payment Method" value={this.state.PaymentMethod}
+                                        onChange={this.onChangePaymentMethod} />
                                 </div>
-                            </form >
-                        </div>
-                    </div >
-                </div>
-            </div >
-            <br /> < br />
-        </div>
+
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                    <label > Package Name: </label>
+                                    <input type="text" required className="form-control" placeholder="Enter Package Name" value={this.state.PackageName}
+                                        onChange={this.onChangePackageName} />
+                                </div>
+
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                    <label > Total Amount: </label>
+                                    <input type="text" required className="form-control" placeholder="Enter Total Amount" value={this.state.TotalAmount}
+                                        onChange={this.onChangeTotalAmount} />
+                                </div>
+
+                                <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                    <label > Payment Status: </label>
+                                    <input type="text" required className="form-control" placeholder="Enter Payment Status" value={this.state.PaymentStatus}
+                                        onChange={this.onChangePaymentStatus} />
+                                </div >
+
+                            </div >
+                            <div className="mb-3 col-lg-6 col-md-6 col-12" >
+                                <input type="submit" value="Create" className="btn btn-primary" />
+                            </div>
+
+                        </form >
+                    </div>
+                </div >
         );
     }
 }
