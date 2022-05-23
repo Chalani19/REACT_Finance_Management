@@ -12,25 +12,28 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
 
     const PaymentID = req.body.PaymentID;
-    const CompanyName = req.body.CompanyName;
-    const Address =req.body.Address;
+    const CustomerID = req.body.CustomerID;
+    const FirstName = req.body.FirstName;
+    const LastName =req.body.LastName;
     const Email = req.body.Email;
-    const PostalCode = req.body.PostalCode;
-    const Description = req.body.Description;
-    const Materials = req.body.Materials;
+    const PaymentMethod = req.body.PaymentMethod;
+    const PackageName = req.body.PackageName;
+    const TotalAmount = req.body.TotalAmount;
+    const PaymentStatus = req.body.PaymentStatus;
    
 
     const newPayment  = new Payment({
         PaymentID,
-        CompanyName,
-        Address,
+        CustomerID,
+        FirstName,
+        LastName,
         Email,
-        PostalCode,
-        Description,
-        Materials
+        PaymentMethod,
+        PackageName,
+        TotalAmount,
+        PaymentStatus
        
     });
-
 
     newPayment.save()
         .then(() => res.json('Payment  added!'))
@@ -57,12 +60,14 @@ router.route('/update/:id').post((req, res) => {
     Payment.findById(req.params.id)
         .then(Payment => {
             Payment.PaymentID = req.body.PaymentID;
-            Payment.CompanyName = req.body.CompanyName;
-            Payment.Address = req.body.Address;
-            Payment.PostalCode = req.body.PostalCode;
+            Payment.CustomerID = req.body.CustomerID;
+            Payment.FirstName = req.body.FirstName;
+            Payment.LastName = req.body.LastName;
             Payment.Email = req.body.Email;
-            Payment.Description = req.body.Description;
-            Payment.Materials = req.body.Materials;
+            Payment.PaymentMethod = req.body.PaymentMethod;
+            Payment.PackageName = req.body.PackageName;
+            Payment.TotalAmount = req.body.TotalAmount;
+            Payment.PaymentStatus = req.body.PaymentStatus;
             
           
 
@@ -74,4 +79,8 @@ router.route('/update/:id').post((req, res) => {
 });
 
 module.exports = router;
+
+
+
+
 

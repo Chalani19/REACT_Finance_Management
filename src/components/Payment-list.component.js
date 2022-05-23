@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
-const Payment = props => ( <
-    tr >
-    <
-    td > { props.Payment.PaymentID } </td> <
-    td > { props.Payment.CompanyName } </td> <
-    td > { props.Payment.Address } </td> <
-    td > { props.Payment.PostalCode } </td> <
-    td > { props.Payment.Email } </td> <
-    td > { props.Payment.Description } </td> <
-    td > { props.Payment.Materials } </td> <
-    td >
-    <
-    Link to = { "/edit/" + props.Payment._id } > Edit </Link> | <a href=" " onClick={() => { props.deletePayment(props.Payment._id) }}>Delete</a > </
-    td > </tr> 
+const Payment = props => (
+    <tr>
+        <td > {props.Payment.PaymentID} </td>
+        <td > {props.Payment.CustomerID} </td>
+        <td > {props.Payment.FirstName} </td>
+        <td > {props.Payment.LastName} </td>
+        <td > {props.Payment.Email} </td>
+        <td > {props.Payment.PaymentMethod} </td>
+        <td > {props.Payment.PackageName} </td>
+        <td > {props.Payment.TotalAmount} </td>
+        <td>  {props.Payment.PaymentStatus}</td>
+        <td >
+            <Link to={"/edit/" + props.Payment._id} > Edit </Link> | <a href=" " onClick={() => { props.deletePayment(props.Payment._id) }}>Delete</a >
+        </td >
+    </tr>
 )
 
 export default class PaymentList extends Component {
@@ -27,7 +28,6 @@ export default class PaymentList extends Component {
             Payment: []
         };
     }
-
 
     componentDidMount() {
         axios.get('http://localhost:5000/Payment/')
@@ -40,7 +40,7 @@ export default class PaymentList extends Component {
     }
 
     getPosts() {
-        axios.get('http://localhost:5000/Payment/')
+        axios.get('http://localhost:5000/Payment/list')
             .then(response => {
                 this.setState({ Payment: response.data })
             })
@@ -62,9 +62,9 @@ export default class PaymentList extends Component {
 
     PaymentList() {
         return this.state.Payment.map(currentPayment => {
-            return <Payment Payment = { currentPayment }
-            deletePayment = { this.deletePayment }
-            key = { currentPayment._id }
+            return <Payment Payment={currentPayment}
+                deletePayment={this.deletePayment}
+                key={currentPayment._id}
             />;
         })
     }
@@ -72,13 +72,10 @@ export default class PaymentList extends Component {
     filterData(Payment, searchKey) {
 
         this.setState({
-            Payment: this.state.Payment.filter(el => el.CompanyName = searchKey)
+            Payment: this.state.Payment.filter(el => el.FirstName = searchKey)
         })
 
     }
-
-
-
 
     handleSearchArea = (e) => {
 
@@ -88,7 +85,7 @@ export default class PaymentList extends Component {
 
             const resultt = response.data
             const result = resultt.filter((props) =>
-                props.CompanyName.includes(searchKey)
+                props.FirstName.includes(searchKey)
             )
 
             this.setState({ Payment: result })
@@ -98,100 +95,84 @@ export default class PaymentList extends Component {
     }
 
     render() {
-        return ( <
-            div className = "container" >
-    
-            <div style = {
-                { float: 'none'}
-            } > 
+        return (
+            <div className="container" >
 
-            <Link to = "/Report" >
-            <button class="btn btn-outline-success my-4 my-sm-0" type="submit">Report</button>
-            </Link>
-            
+                <div className="col-lg-9 mt-2 mb-2" >
+                    <h1 style={{ color: "#990033" }}> All Payment </h1>
+                </div >
+                <br />
+                <br />
 
-            </div>  <br/>
-            
-            <
-            div className = "row" >
-            <
-            div className = "col-lg-9 mt-2 mb-2" >
-            <
-            h4 > All Payment </h4> </
-            div > <
-            div className = "col-lg-3 mt-2 mb-2" >
-            <
-            input className = "form-control"
-            type = "search"
-            placeholder = "Search by Company Name"
-            name = "searchQuery"
-            onChange = { this.handleSearchArea } >
-            </
-            input> </
-            div > </
-            div>
+                <div className="row" >
+                    <div className="col-lg-9 mt-2 mb-2"  style={{ float: 'none' }} >
+                        <Link to="/Report" >
+                            <button class="btn btn-outline-success my-4 my-sm-0" type="submit">Report</button>
+                        </Link>
+                    </div>
 
-            <
-            table class="table table-bordered table-white" >
-            <
-            thead className = "thead-light" >
-            <
-            tr >
-            <
-            th > Payment ID </th> <
-            th > Company Name </th> <
-            th > Company Street Address </th> <
-            th > Postal Code </th> <
-            th > E mail </th> <
-            th > Brief Description of company </th> <
-            th > Supply Materials And goods </th> <
-            th > Actions </th> </
-            tr > </
-            thead> <
-            tbody >
-            
-             {
-                this.state.Payment.map(props =>
-                    <
-                    tr key = { props.PaymentID } >
-                    
-                    <td > { props.PaymentID } </td>  <
-                    td > { props.CompanyName } </td>  <
-                    td > { props.Address } </td>  <
-                    td > { props.PostalCode } </td>  < 
-                    td > { props.Email } </td>  <  
-                    td > { props.Description } </td>  < 
-                    td > { props.Materials } </td>  <  
+                    <div className="col-lg-3 mt-2 mb-2" style={{ float: 'right' }}>
+                        <input className="form-control" type="search" placeholder="Search by First Name" name="searchQuery"
+                            onChange={this.handleSearchArea} >
+                        </input>
+                    </div >
+                </div>
 
-                    td >
-                    <
-                    Link to = { "/edit/" + props._id } >  <Button variant = "warning btn-sm"> Edit </Button> </Link>  
-                    <a href="" onClick={() => { this.deletePayment(props._id) }}> <Button variant = "danger btn-sm"> Delete </Button> </a > 
-                    </
-                    td >
+                <table class="table table-bordered table-white" >
+                    <thead className="thead-light" >
+                        <tr>
+                            <th > Payment ID </th>
+                            <th > Customer ID </th>
+                            <th > First Name </th>
+                            <th > Last Name </th>
+                            <th > E mail </th>
+                            <th > Payment Method</th>
+                            <th > Package Name:</th>
+                            <th > Total Amount</th>
+                            <th > Payment Status</th>
+                            <th > Actions </th>
+                        </tr >
+                    </thead>
+                    <tbody>
 
-                    </tr>
-                )
+                        {
+                            this.state.Payment.map(props =>
+                                <tr key={props.PaymentID} >
 
-            }
+                                    <td > {props.PaymentID} </td>
+                                    <td > {props.CustomerID} </td>
+                                    <td > {props.FirstName} </td>
+                                    <td > {props.LastName} </td>
+                                    <td > {props.Email} </td>
+                                    <td > {props.PaymentMethod} </td>
+                                    <td > {props.PackageName} </td>
+                                    <td > {props.TotalAmount}</td>
+                                    <td>  {props.PaymentStatus}</td>
+                                    <td >
+                                        <Link to={"/edit/" + props._id} >  <Button variant="warning btn-sm"> Edit </Button> </Link>
+                                        <a href="" onClick={() => { this.deletePayment(props._id) }}> <Button variant="danger btn-sm"> Delete </Button> </a >
+                                    </td >
+                                </tr>
+                            )
+                        }
 
-            </tbody> </
-            table >
+                    </tbody>
+                </table >
 
-            <
-            div style = {
-                { float: 'right' }
-            } >
+                <div style={{ float: 'right' }} >
 
-            <
-            Link to = "/create" >
-            <button type="button" class="btn btn-success" variant = "primary" > New Payment </button>
-            </
-            Link >
-            </div>
+                    <Link to="/create" >
+                        <button type="button" class="btn btn-success" variant="primary" > New Payment </button>
+                    </Link >
+                </div>
 
             </div>
         )
     }
 }
+
+
+
+
+
 

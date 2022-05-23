@@ -5,20 +5,24 @@ const Schema = mongoose.Schema;
 //Databass Schema
 
 const PaymentSchema = new Schema({
-    PaymentID: { type: Number, required: true },
-    CompanyName: { type: String, required: true },
-    Address: { type: String, required: true },
-    PostalCode: { type: String, required: true },
+    PaymentID: { type: String, required: true },
+    CustomerID: { type: String, required: true },
+    FirstName: { type: String, required: true },
+    LastName: { type: String, required: true },
     Email: { type: String, required: true },
-    Description: { type: String, required: true },
-    Materials: { type: String, required: true },
+    PaymentMethod: { type: String, required: true },
+    PackageName: { type: String, required: true },
+    TotalAmount: { type: String, required: true },
+    PaymentStatus: { type: String, required: true },
 
 }, {
     timestamps: true,
 });
 
-
 const Payment  = mongoose.model('Payment ', PaymentSchema);
 
 module.exports = Payment ;
+
+
+
 
