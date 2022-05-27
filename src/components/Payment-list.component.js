@@ -97,7 +97,7 @@ export default class PaymentList extends Component {
     render() {
         return (
             <div>
-                <h1 className="text-center" style={{ color: "#990033" }}> All  Payment </h1>
+                <h1 className="text-center" style={{ color: "#990033" }}> All  Payments </h1>
                 <br />
             
                 <div className="container">

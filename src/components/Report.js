@@ -148,13 +148,7 @@ export default class PaymentList extends Component {
                         <input type="Button" onClick={this.Report} value="Print This Report" className="btn btn-danger" />
                     </div>
 
-                    <br></br>
-
-                    <div className="text-center">
-                        <Link to="/list" >
-                            <button type="button" class="btn btn-success" variant="primary" > Payment Details </button>
-                        </Link >
-                    </div>
+                   
 
                 </div>
 

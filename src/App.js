@@ -2,7 +2,6 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/navbar.component"
-import home from './components/home';
 import EditPayment from "./components/edit-Payment.component";
 import CreatePayment from "./components/create-Payment.component";
 import PaymentList from "./components/Payment-list.component";
@@ -16,8 +15,9 @@ function App() {
         <div >
         <Navbar/>
         <br/>
-        <Route path="/" exact component = {home}/>
-        <Route path = "/list" exact component = { PaymentList }/>
+        <br/>
+        <br/>
+        <Route path = "/" exact component = { PaymentList }/>
         <Route path = "/edit/:id" component = { EditPayment }/> 
         <Route path = "/create" component = { CreatePayment }/>
         <Route path = "/Report" component = { Report }/> 
