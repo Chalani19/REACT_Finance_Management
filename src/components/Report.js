@@ -109,8 +109,8 @@ export default class PaymentList extends Component {
 
                <br />
 
-                <table class="table table-bordered table-white" >
-                    <thead className="thead-light" >
+               <table class="table table-bordered table-light" >
+                        <thead className="thead-dark" >
                         <tr >
                             <th> Payment ID </th>
                             <th> Customer ID</th>

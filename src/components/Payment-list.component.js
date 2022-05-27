@@ -115,14 +115,14 @@ export default class PaymentList extends Component {
                         </div >
                     </div>
 
-                    <table class="table table-bordered table-white" >
-                        <thead className="thead-light" >
+                    <table class="table table-bordered table-light" >
+                        <thead className="thead-dark" >
                             <tr>
                                 <th > Payment ID </th>
                                 <th > Customer ID </th>
                                 <th > First Name </th>
                                 <th > Last Name </th>
-                                <th > E mail </th>
+                                <th > E-mail </th>
                                 <th > Payment Method</th>
                                 <th > Package Name:</th>
                                 <th > Total Amount</th>

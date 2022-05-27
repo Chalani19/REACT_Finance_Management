@@ -8,7 +8,7 @@ export default class Navbar extends Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-lig">
 
             <div className="container">
-                <a className="navbar-brand" href="#" style={{ color: "#800040"}}><font size ="6">RUSTY  DECO</font></a>
+                <a className="navbar-brand" href="#" style={{ color: "#333FFF"}}><font size ="6">RUSTY  DECO</font></a>
                 <button className="navbar-toggler" type="button" data-toggle="collaps" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
